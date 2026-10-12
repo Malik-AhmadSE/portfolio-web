@@ -16,7 +16,7 @@ export default function Hero() {
       <div className="relative mx-auto w-full max-w-6xl px-6 pt-32 md:px-10 md:pt-40">
         {/* Masthead row */}
         <div className="flex flex-wrap items-center justify-between gap-3 font-mono text-[10px] uppercase tracking-[0.2em] text-fog md:text-[11px]">
-          <span>Portfolio — Full-Stack Web</span>
+          <span>Portfolio — Software Engineer</span>
           <span className="flex items-center gap-2">
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
@@ -27,7 +27,7 @@ export default function Hero() {
         </div>
 
         {/* Headline */}
-        <h1 className="mt-10 font-display text-[clamp(2.9rem,8vw,6.75rem)] font-semibold leading-[1.02] tracking-[-0.02em]">
+        <h1 className="mt-10 font-display text-[clamp(2.5rem,9.5vw,6.75rem)] font-semibold leading-[1.02] tracking-[-0.02em]">
           <span className="hero-line">
             <span>{line1}</span>
           </span>
@@ -53,12 +53,8 @@ export default function Hero() {
                 <MagneticButton href="/#work" variant="solid">
                   View case studies ↓
                 </MagneticButton>
-                <MagneticButton
-                  href={`https://wa.me/${site.whatsapp}`}
-                  variant="outline"
-                  external
-                >
-                  Get in touch
+                <MagneticButton href={site.cvUrl} variant="outline" download>
+                  Download CV
                 </MagneticButton>
               </div>
             </Reveal>

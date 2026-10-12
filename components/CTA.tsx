@@ -10,17 +10,17 @@ export default function CTA() {
           <div className="md:col-span-7">
             <Reveal>
               <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-fog">
-                <span className="text-accent">06</span> / Contact
+                <span className="text-accent">05</span> / Contact
               </p>
               <h2 className="mt-4 font-display text-5xl font-semibold leading-[1.05] tracking-tight md:text-7xl">
-                Have a product
+                Have a role
                 <br />
-                to build?
+                in mind?
               </h2>
               <p className="mt-6 max-w-md text-lg leading-relaxed text-soil">
-                Tell me what you&rsquo;re making. I&rsquo;ll reply within a day
-                with honest thoughts on scope, timeline, and whether the web is
-                the right tool.
+                I&rsquo;m a software engineer at Intellilake, open to full-time
+                roles where I own the web stack end to end. Message me or grab
+                my CV — I reply within a day.
               </p>
               <div className="mt-10 flex flex-wrap gap-4">
                 <MagneticButton
@@ -30,8 +30,8 @@ export default function CTA() {
                 >
                   Start a conversation
                 </MagneticButton>
-                <MagneticButton href={`mailto:${site.email}`} variant="outline">
-                  {site.email}
+                <MagneticButton href={site.cvUrl} variant="outline" download>
+                  Download CV ↓
                 </MagneticButton>
               </div>
             </Reveal>
@@ -54,9 +54,12 @@ export default function CTA() {
                 </div>
                 <div className="border-b border-line py-5">
                   <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-fog">
-                    Typical engagement
+                    Currently
                   </dt>
-                  <dd className="mt-1.5 text-ink">Fixed scope or monthly retainer</dd>                </div>
+                  <dd className="mt-1.5 text-ink">
+                    Software Engineer at Intellilake · via Axiom World
+                  </dd>
+                </div>
               </dl>
             </Reveal>
           </div>

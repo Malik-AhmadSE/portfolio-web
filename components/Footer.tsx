@@ -46,13 +46,13 @@ export default function Footer() {
               </span>
             </div>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-paper/60">
-              {site.role}. Web apps that feel alive — four years, thirty-plus
-              shipped projects, from dashboards to storefronts.
+              {site.role}. Web apps that feel alive — three years, twenty-plus
+              shipped projects, from dashboards to LLM systems.
             </p>
           </div>
 
           <div className="md:col-span-3">
-            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-paper/40">
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-paper/55">
               Index
             </p>
             <ul className="mt-4 space-y-2.5">
@@ -70,7 +70,7 @@ export default function Footer() {
           </div>
 
           <div className="md:col-span-4">
-            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-paper/40">
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-paper/55">
               Elsewhere
             </p>
             <div className="mt-4 flex flex-wrap gap-3">
@@ -90,7 +90,7 @@ export default function Footer() {
         </div>
 
         {/* Baseline */}
-        <div className="flex flex-wrap items-center justify-between gap-4 border-t border-paper/15 pt-6 font-mono text-[10px] uppercase tracking-[0.18em] text-paper/40">
+        <div className="flex flex-wrap items-center justify-between gap-4 border-t border-paper/15 pt-6 font-mono text-[10px] uppercase tracking-[0.18em] text-paper/55">
           <p>
             © {year} {site.name} — All rights reserved
           </p>

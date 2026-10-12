@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { projects } from "@/content/site";
+import { confidentialWork, projects } from "@/content/site";
 import DeviceShowcase from "./DeviceShowcase";
 import Reveal from "./Reveal";
 
@@ -12,6 +12,8 @@ function GitHubIcon({ className = "h-3.5 w-3.5" }: { className?: string }) {
 }
 
 export default function Work() {
+  const liveCount = projects.filter((p) => p.liveUrl).length;
+
   return (
     <section id="work" className="scroll-mt-16 border-b border-line">
       <div className="mx-auto w-full max-w-6xl px-6 py-24 md:px-10 md:py-32">
@@ -26,8 +28,8 @@ export default function Work() {
             </h2>
           </div>
           <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-fog">
-            {String(projects.length).padStart(2, "0")} case studies · Live on
-            the web
+            {String(projects.length).padStart(2, "0")} case studies ·{" "}
+            {liveCount} live embeds · {confidentialWork.length} under NDA
           </p>
         </div>
 
@@ -36,6 +38,7 @@ export default function Work() {
           {projects.map((project, i) => {
             const flip = i % 2 === 1;
             const headlineMetric = project.metrics[0];
+            const hasRepo = !project.repoUrl.includes("yourhandle");
             return (
               <article
                 key={project.slug}
@@ -77,23 +80,27 @@ export default function Work() {
                     >
                       Read case study →
                     </Link>
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="link-underline font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-soil transition-colors hover:text-ink"
-                    >
-                      Visit live ↗
-                    </a>
-                    <a
-                      href={project.repoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`${project.name} source on GitHub`}
-                      className="flex h-10 w-10 items-center justify-center border border-ink/25 text-ink transition-colors hover:border-ink hover:bg-ink hover:text-paper"
-                    >
-                      <GitHubIcon />
-                    </a>
+                    {project.liveUrl && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="link-underline font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-soil transition-colors hover:text-ink"
+                      >
+                        Visit live ↗
+                      </a>
+                    )}
+                    {hasRepo && (
+                      <a
+                        href={project.repoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${project.name} source on GitHub`}
+                        className="flex h-10 w-10 items-center justify-center border border-ink/25 text-ink transition-colors hover:border-ink hover:bg-ink hover:text-paper"
+                      >
+                        <GitHubIcon />
+                      </a>
+                    )}
                   </div>
                 </Reveal>
 
@@ -103,7 +110,7 @@ export default function Work() {
                 >
                   <figure>
                     <DeviceShowcase project={project} />
-                    <figcaption className="mt-0 pr-[16%] font-mono text-[10px] uppercase tracking-[0.2em] text-fog sm:pr-[14%]">
+                    <figcaption className="mt-0 text-center font-mono text-[10px] uppercase tracking-[0.2em] text-fog sm:pr-[14%] sm:text-left">
                       fig. {String(i + 1).padStart(2, "0")} — {project.name}
                     </figcaption>
                   </figure>
@@ -111,6 +118,70 @@ export default function Work() {
               </article>
             );
           })}
+        </div>
+
+        {/* Confidential deployments — real engagements that can't be shown */}
+        <div className="mt-20 border-t border-line pt-16">
+          <div className="flex flex-wrap items-end justify-between gap-6">
+            <div>
+              <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-fog">
+                <span className="text-accent">+</span> / Under NDA
+              </p>
+              <h3 className="mt-4 font-display text-3xl font-semibold tracking-tight md:text-4xl">
+                Also shipped — quietly.
+              </h3>
+            </div>
+            <p className="max-w-xs font-mono text-[11px] uppercase leading-relaxed tracking-[0.18em] text-fog">
+              Fintech engagements I can&apos;t screenshot · full walkthrough in
+              person
+            </p>
+          </div>
+
+          <div
+            className={`mt-12 grid gap-px border border-line bg-line ${
+              confidentialWork.length > 1 ? "md:grid-cols-2" : ""
+            }`}
+          >
+            {confidentialWork.map((item) => (
+              <article key={item.name} className="bg-paper p-8 md:p-10">
+                <div className="flex items-center justify-between gap-4">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-fog">
+                    {item.period}
+                  </p>
+                  <span className="border border-accent px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.2em] text-accent">
+                    NDA
+                  </span>
+                </div>
+                <h4 className="mt-5 font-display text-2xl font-semibold tracking-tight md:text-[1.7rem]">
+                  {item.name}
+                </h4>
+                <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.16em] text-fog">
+                  {item.client}
+                </p>
+                <p className="mt-5 max-w-2xl leading-relaxed text-soil">{item.summary}</p>
+                <ul className="mt-6 flex flex-wrap gap-2">
+                  {item.tags.map((tag) => (
+                    <li
+                      key={tag}
+                      className="border border-line px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-soil"
+                    >
+                      {tag}
+                    </li>
+                  ))}
+                </ul>
+                {item.referenceUrl && (
+                  <a
+                    href={item.referenceUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="link-underline mt-7 inline-block font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-soil transition-colors hover:text-ink"
+                  >
+                    Reference: {new URL(item.referenceUrl).host} ↗
+                  </a>
+                )}
+              </article>
+            ))}
+          </div>
         </div>
       </div>
     </section>

@@ -5,7 +5,7 @@ import "./globals.css";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "900"],
+  weight: ["400", "500", "600"],
   style: ["normal", "italic"],
   variable: "--font-fraunces",
   display: "swap",
@@ -13,14 +13,14 @@ const fraunces = Fraunces({
 
 const instrument = Instrument_Sans({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500"],
   variable: "--font-instrument",
   display: "swap",
 });
 
 const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
+  weight: ["400", "500"],
   variable: "--font-mono-jb",
   display: "swap",
 });
@@ -29,11 +29,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: `${site.name} — ${site.role}`,
   description:
-    "Portfolio of a full-stack web developer. Four years, thirty-plus shipped projects — websites, dashboards and web apps that feel alive.",
+    "Portfolio of a software engineer. Three years, twenty-plus shipped projects — web apps, dashboards and LLM systems that feel alive.",
   openGraph: {
     title: `${site.name} — ${site.role}`,
     description:
-      "Four years, thirty-plus shipped projects — websites, dashboards and web apps that feel alive.",
+      "Three years, twenty-plus shipped projects — web apps, dashboards and LLM systems that feel alive.",
     type: "website",
     url: site.url,
     siteName: `${site.name} — ${site.role}`,
@@ -54,9 +54,12 @@ const personJsonLd = {
     "Next.js",
     "TypeScript",
     "Node.js",
+    "NestJS",
+    "MongoDB",
     "PostgreSQL",
+    "LLM & AI Integration",
+    "Data Engineering",
     "Web Performance",
-    "UI Engineering",
   ],
 };
 
@@ -70,9 +73,15 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`scroll-smooth ${fraunces.variable} ${instrument.variable} ${jetbrains.variable}`}
     >
       <body className="bg-paper font-sans text-ink antialiased">
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "document.documentElement.classList.add('js')",
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}

@@ -10,7 +10,7 @@ export default function Timeline() {
             <span className="text-accent">04</span> / Experience
           </p>
           <h2 className="mt-4 font-display text-5xl font-semibold tracking-tight md:text-6xl">
-            Four years of shipping.
+            From MERN to MCP.
           </h2>
         </div>
 
@@ -26,7 +26,19 @@ export default function Timeline() {
                     {job.role}
                   </h3>
                   <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.16em] text-fog">
-                    {job.company}
+                    {job.url ? (
+                      <a
+                        href={job.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="underline decoration-line underline-offset-4 transition-colors hover:text-ink"
+                      >
+                        {job.company}
+                      </a>
+                    ) : (
+                      job.company
+                    )}
+                    {job.note ? <span className="text-soil"> · {job.note}</span> : null}
                   </p>
                 </div>
                 <p className="leading-relaxed text-soil md:col-span-4">

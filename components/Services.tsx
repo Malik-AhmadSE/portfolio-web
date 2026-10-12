@@ -10,7 +10,7 @@ export default function Services() {
             <span className="text-accent">02</span> / What I do
           </p>
           <h2 className="mt-4 font-display text-5xl font-semibold tracking-tight md:text-6xl">
-            Four ways we can work together.
+            Four disciplines, one engineer.
           </h2>
         </div>
 

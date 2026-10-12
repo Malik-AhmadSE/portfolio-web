@@ -5,6 +5,7 @@ type MagneticButtonProps = {
   children: React.ReactNode;
   variant?: "solid" | "outline" | "accent";
   external?: boolean;
+  download?: boolean;
   className?: string;
 };
 
@@ -17,22 +18,28 @@ const variants: Record<NonNullable<MagneticButtonProps["variant"]>, string> = {
   outline: "border border-ink/30 text-ink hover:border-ink hover:bg-ink hover:text-paper",
 };
 
-/**
- * Editorial-styled call-to-action link.
- * (Kept the component name so existing imports don't break.)
- */
+/** Editorial-styled call-to-action link. */
 export default function MagneticButton({
   href,
   children,
   variant = "solid",
   external,
+  download,
   className = "",
 }: MagneticButtonProps) {
   const classes = `${base} ${variants[variant]} ${className}`;
 
   if (external) {
     return (
-      <a href={href} target="_blank" rel="noopener noreferrer" className={classes}>
+      <a href={href} target="_blank" rel="noopener noreferrer" download={download} className={classes}>
+        {children}
+      </a>
+    );
+  }
+
+  if (download) {
+    return (
+      <a href={href} download className={classes}>
         {children}
       </a>
     );

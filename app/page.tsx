@@ -5,19 +5,19 @@ import Hero from "@/components/Hero";
 import Nav from "@/components/Nav";
 import ScrollProgress from "@/components/ScrollProgress";
 import Services from "@/components/Services";
-import Testimonials from "@/components/Testimonials";
 import Timeline from "@/components/Timeline";
 import Work from "@/components/Work";
 
 const skills = [
-  "TypeScript",
   "React",
   "Next.js",
+  "TypeScript",
   "Node.js",
+  "NestJS",
   "PostgreSQL",
-  "Tailwind CSS",
-  "GraphQL",
+  "MongoDB",
   "Docker",
+  "AI / LLM Integration",
 ];
 
 export default function Home() {
@@ -25,7 +25,7 @@ export default function Home() {
     <>
       <ScrollProgress />
       <Nav />
-      <main>
+      <main id="main">
         <Hero />
 
         {/* Skills strip — static, like a colophon */}
@@ -50,7 +50,6 @@ export default function Home() {
         <Services />
         <About />
         <Timeline />
-        <Testimonials />
         <CTA />
       </main>
       <Footer />

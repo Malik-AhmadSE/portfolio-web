@@ -9,32 +9,18 @@
   --color-cream: #efede3;
   --color-ink: #1a1712;
   --color-soil: #57503f;
-  --color-fog: #918a76;
+  --color-fog: #6f684f;
   --color-line: #e2ddcd;
   --color-accent: #e8490f;
   --color-accent-deep: #bf3a08;
-
-  --shadow-hard: 5px 5px 0 0 var(--color-ink);
-  --shadow-card: 0 1px 2px rgb(26 23 18 / 0.06),
-    0 20px 44px -28px rgb(26 23 18 / 0.3);
-
-  --animate-float: float 8s ease-in-out infinite;
-
-  @keyframes float {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-8px);
-    }
-  }
 }
 
 /* ── Base ─────────────────────────────────────────────────── */
 
 html {
   scroll-behavior: smooth;
+  /* decorative glow accents extend past their sections — never scroll to them */
+  overflow-x: clip;
 }
 
 body {
@@ -55,18 +41,6 @@ body {
 
 /* ── Texture & structure ──────────────────────────────────── */
 
-/* Subtle print grain */
-.noise::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  opacity: 0.4;
-  mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
 /* Blueprint column rules (12-col) */
 .grid-rules {
   background-image: linear-gradient(
@@ -78,11 +52,6 @@ body {
 }
 
 /* ── Typography helpers ───────────────────────────────────── */
-
-.text-stroke {
-  -webkit-text-stroke: 1.5px rgb(26 23 18 / 0.25);
-  color: transparent;
-}
 
 .dropcap::first-letter {
   font-family: var(--font-display);
@@ -112,17 +81,18 @@ body {
 
 /* ── Reveal on scroll ─────────────────────────────────────── */
 
-.reveal {
+/* Hidden state applies only when JS is running (html.js is set by an
+   inline script in the head) — without JS every block stays visible. */
+html.js .reveal {
   opacity: 0;
   transform: translateY(20px);
   transition:
     opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
     transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
   transition-delay: var(--reveal-delay, 0ms);
-  will-change: opacity, transform;
 }
 
-.reveal.is-visible {
+html.js .reveal.is-visible {
   opacity: 1;
   transform: none;
 }
@@ -349,7 +319,7 @@ body {
     scroll-behavior: auto;
   }
 
-  .reveal {
+  html.js .reveal {
     opacity: 1;
     transform: none;
     transition: none;

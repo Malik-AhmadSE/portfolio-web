@@ -48,13 +48,14 @@ export default async function CaseStudy({
   const project = projects[idx];
   const next = projects[(idx + 1) % projects.length];
   const headlineMetric = project.metrics[0];
+  const hasRepo = !project.repoUrl.includes("yourhandle");
 
   return (
     <>
       <ScrollProgress />
       <Nav />
 
-      <main>
+      <main id="main">
         {/* ── hero ── */}
         <section className="relative overflow-hidden border-b border-line">
           <div
@@ -112,22 +113,26 @@ export default async function CaseStudy({
 
                 <Reveal delay={300}>
                   <div className="mt-10 flex flex-wrap items-center gap-6">
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-ink px-6 py-3.5 font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-paper transition-colors hover:bg-accent"
-                    >
-                      Visit live site ↗
-                    </a>
-                    <a
-                      href={project.repoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="link-underline font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-soil hover:text-ink"
-                    >
-                      View source
-                    </a>
+                    {project.liveUrl && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-ink px-6 py-3.5 font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-paper transition-colors hover:bg-accent"
+                      >
+                        Visit live site ↗
+                      </a>
+                    )}
+                    {hasRepo && (
+                      <a
+                        href={project.repoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="link-underline font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-soil hover:text-ink"
+                      >
+                        View source
+                      </a>
+                    )}
                     <span className="font-mono text-xs text-fog">
                       {headlineMetric.value} {headlineMetric.label}
                     </span>

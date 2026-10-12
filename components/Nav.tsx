@@ -23,8 +23,24 @@ export default function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
   return (
-    <header
+    <>
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:bg-ink focus:px-4 focus:py-2.5 focus:font-mono focus:text-[11px] focus:font-medium focus:uppercase focus:tracking-[0.18em] focus:text-paper"
+      >
+        Skip to content
+      </a>
+      <header
       className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300 ${
         scrolled || open
           ? "border-line bg-paper/95 backdrop-blur-sm"
@@ -42,7 +58,7 @@ export default function Nav() {
             Ahmad Ali
           </span>
           <span className="mt-0.5 hidden font-mono text-[10px] uppercase tracking-[0.2em] text-fog lg:inline">
-            / Full-Stack Dev
+            / Software Engineer
           </span>
         </Link>
 
@@ -58,12 +74,11 @@ export default function Nav() {
             </Link>
           ))}
           <a
-            href={`https://wa.me/${site.whatsapp}`}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={site.cvUrl}
+            download
             className="bg-ink px-4 py-2.5 font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-paper transition-colors hover:bg-accent"
           >
-            Get in touch
+            Download CV
           </a>
         </div>
 
@@ -72,6 +87,7 @@ export default function Nav() {
           type="button"
           aria-label="Toggle menu"
           aria-expanded={open}
+          aria-controls="mobile-menu"
           onClick={() => setOpen((v) => !v)}
           className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 md:hidden"
         >
@@ -90,8 +106,9 @@ export default function Nav() {
 
       {/* Mobile menu */}
       <div
+        id="mobile-menu"
         className={`overflow-hidden border-line transition-[max-height] duration-300 ease-out md:hidden ${
-          open ? "max-h-80 border-t" : "max-h-0"
+          open ? "max-h-96 border-t" : "max-h-0"
         }`}
       >
         <div className="flex flex-col gap-1 px-6 py-4">
@@ -106,15 +123,16 @@ export default function Nav() {
             </Link>
           ))}
           <a
-            href={`https://wa.me/${site.whatsapp}`}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={site.cvUrl}
+            download
+            onClick={() => setOpen(false)}
             className="mt-2 bg-ink px-4 py-3 text-center font-mono text-[11px] uppercase tracking-[0.18em] text-paper"
           >
-            Get in touch
+            Download CV
           </a>
         </div>
       </div>
-    </header>
+      </header>
+    </>
   );
 }
